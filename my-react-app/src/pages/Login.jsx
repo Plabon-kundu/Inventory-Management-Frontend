@@ -1,77 +1,98 @@
+// src/pages/Login.jsx
 import React, { useState } from "react";
-import "./Login.css";
 import { useNavigate } from "react-router-dom";
+import { MOCK_USERS } from "../rbacData";
 
 export default function Login() {
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState("");
+  const [selectedRole, setSelectedRole] = useState("staff");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setError("");
+  const roles = [
+    { id: "admin", label: "Admin", color: "admin" },
+    { id: "manager", label: "Manager", color: "manager" },
+    { id: "staff", label: "Staff", color: "staff" },
+  ];
 
-    if (!email || !password) {
-      setError("Email and Password are required.");
+  const handleLogin = (e) => {
+    e.preventDefault();
+
+    const user = MOCK_USERS.find(
+      (u) => u.role === selectedRole && u.username === username && u.password === password
+    );
+
+    if (!user) {
+      setError("Invalid username or password");
       return;
     }
 
-    // Mock login (Replace with real API later)
-    localStorage.setItem("token", "mock-token");
-
-    // Demo role (for future role-based routing)
-    if (email.includes("admin")) {
-      localStorage.setItem("role", "admin");
-    } else if (email.includes("manager")) {
-      localStorage.setItem("role", "manager");
-    } else {
-      localStorage.setItem("role", "staff");
-    }
+    localStorage.setItem(
+      "user",
+      JSON.stringify({
+        id: user.id,
+        name: user.name,
+        role: user.role,
+        username: user.username,
+      })
+    );
 
     navigate("/dashboard");
   };
 
   return (
-    <div className="login-page">
+    <div className="login-container">
       <div className="login-card">
-        <h1 className="login-title">Inventory Management System</h1>
-        <h2 className="login-card-title">Login</h2>
+        <div className="login-header">
+          <h1>🔐 Inventory Management</h1>
+          <p>Role-Based Access Control System</p>
+        </div>
 
-        {error && <div className="login-error">{error}</div>}
+        <div className="role-selector">
+          {roles.map((role) => (
+            <span
+              key={role.id}
+              className={`role-badge ${role.color} ${selectedRole === role.id ? "selected" : ""}`}
+              onClick={() => setSelectedRole(role.id)}
+            >
+              {role.label}
+            </span>
+          ))}
+        </div>
 
-        <form onSubmit={handleSubmit} className="login-form">
-          <label className="login-label">Email</label>
-          <input
-            className="login-input"
-            type="email"
-            placeholder="example@yoursite.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+        <form onSubmit={handleLogin}>
+          <div className="form-group">
+            <label>Username</label>
+            <input
+              type="text"
+              className="form-control"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Enter username"
+              required
+            />
+          </div>
 
-          <label className="login-label">Password</label>
-          <input
-            className="login-input"
-            type="password"
-            placeholder="Enter your password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <div className="form-group">
+            <label>Password</label>
+            <input
+              type="password"
+              className="form-control"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter password"
+              required
+            />
+          </div>
+
+          {error ? <div className="error-text">{error}</div> : null}
 
           <button type="submit" className="login-btn">
             Login
           </button>
         </form>
-
-        <button
-          type="button"
-          className="login-link"
-          onClick={() => alert("Sign up page is not implemented yet.")}
-        >
-          Don't have an account?
-        </button>
       </div>
     </div>
   );
