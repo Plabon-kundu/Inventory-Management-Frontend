@@ -1,0 +1,208 @@
+:root {
+  --deep-bg: #11073b;
+  --glass: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --electric-blue: #4ec3f5;
+  --indigo-glow: #e6e6f0;
+}
+
+/* Fullscreen Page Wrapper */
+.movement-page-wrapper {
+  background-color: var(--deep-bg);
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  padding: 60px 40px;
+  position: relative;
+  overflow-x: hidden;
+  color: white;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* Background Decor */
+.glow-circle {
+  position: absolute;
+  width: 800px;
+  height: 800px;
+  border-radius: 50%;
+  filter: blur(160px);
+  z-index: 0;
+  opacity: 0.15;
+}
+.top-right { top: -250px; right: -200px; background: var(--electric-blue); }
+.bottom-left { bottom: -250px; left: -200px; background: var(--indigo-glow); }
+
+.movement-content-container {
+  width: 100%;
+  max-width: 1400px; /* Spacious width for Laptop */
+  z-index: 10;
+}
+
+.movement-header {
+  margin-bottom: 40px;
+}
+
+.page-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  letter-spacing: -2px;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.page-title span {
+  color: var(--electric-blue);
+}
+
+.movement-header p {
+  color: #94a3b8;
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+
+/* Glass Panel */
+.movement-glass-panel {
+  background: var(--glass);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid var(--glass-border);
+  border-radius: 40px;
+  padding: 50px;
+  box-shadow: 0 50px 100px rgba(0, 0, 0, 0.5);
+}
+
+/* Filter Section */
+.filter-container {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.filter-container select,
+.filter-container input {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 15px 20px;
+  border-radius: 12px;
+  color: white;
+  font-size: 1rem;
+  min-width: 200px;
+  transition: 0.3s;
+}
+
+.filter-container select:focus,
+.filter-container input:focus {
+  outline: none;
+  border-color: var(--electric-blue);
+  box-shadow: 0 0 20px rgba(78, 195, 245, 0.2);
+}
+
+/* Table Alignment Fixes */
+.table-wrapper {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.movement-table {
+  width: 100%;
+  border-collapse: collapse; /* Crucial for perfect header alignment */
+  text-align: left;
+}
+
+.movement-table th {
+  padding: 20px;
+  color: var(--indigo-glow);
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  border-bottom: 2px solid rgba(78, 195, 245, 0.3);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.movement-table td {
+  padding: 20px;
+  font-size: 1rem;
+  color: #e2e8f0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.movement-table tbody tr {
+  transition: 0.3s ease;
+}
+
+.movement-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.movement-table tbody tr:hover td {
+  color: var(--electric-blue);
+}
+
+/* Type Badges */
+.sale-badge {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.purchase-badge {
+  background: rgba(34, 197, 94, 0.15);
+  color: #4ade80;
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+/* No Records */
+.no-records-glass {
+  padding: 60px;
+  text-align: center;
+  border: 1px dashed var(--glass-border);
+  border-radius: 20px;
+  color: var(--indigo-glow);
+}
+
+/* Scrollbar Styling for Laptop */
+.table-wrapper::-webkit-scrollbar {
+  height: 8px;
+}
+.table-wrapper::-webkit-scrollbar-thumb {
+  background: var(--glass-border);
+  border-radius: 10px;
+}
+/* ===== Dropdown (Select) Fix ===== */
+.filter-container select {
+  cursor: pointer;
+  appearance: none; /* Removes default browser arrow to style our own */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 15px;
+  padding-right: 40px !important;
+}
+
+/* This targets the actual dropdown menu list */
+.filter-container select option {
+  background-color: #1b274a; /* A slightly lighter version of your deep-bg */
+  color: rgb(182, 202, 231);
+  padding: 10px;
+}
+
+/* Fix for Chrome/Safari/Edge to ensure the background stays dark */
+.filter-container select:focus {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Optional: Adding a hover state for the options if the browser supports it */
+.filter-container select option:hover {
+  background-color: var(--electric-blue);
+  color: #6f5bbb;
+}

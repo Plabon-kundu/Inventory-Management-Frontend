@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./WarehouseForm.css";
 
 const WarehouseForm = ({ onSubmit, initialData = {} }) => {
   const [name, setName] = useState(initialData.name || "");
@@ -11,32 +12,48 @@ const WarehouseForm = ({ onSubmit, initialData = {} }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Warehouse Form</h2>
+    <form className="structured-form" onSubmit={handleSubmit}>
+      <div className="form-grid">
+        {/* Top Row: Split 50/50 */}
+        <div className="form-group">
+          <label>Warehouse Name</label>
+          <input
+            type="text"
+            placeholder="Enter entity name..."
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+        </div>
 
-      <input
-        type="text"
-        placeholder="Warehouse Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        required
-      />
+        <div className="form-group">
+          <label>Location / Region</label>
+          <input
+            type="text"
+            placeholder="e.g. Dhaka, BD"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            required
+          />
+        </div>
 
-      <input
-        type="text"
-        placeholder="Location"
-        value={location}
-        onChange={(e) => setLocation(e.target.value)}
-        required
-      />
+        {/* Bottom Row: Full Width */}
+        <div className="form-group full-width">
+          <label>Description</label>
+          <textarea
+            placeholder="Provide operational details..."
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            rows="4"
+          />
+        </div>
+      </div>
 
-      <textarea
-        placeholder="Description"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      />
-
-      <button type="submit">Save</button>
+      <div className="form-actions">
+        <button type="submit" className="save-btn">
+          Confirm & Save Node
+        </button>
+      </div>
     </form>
   );
 };
