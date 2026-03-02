@@ -1,0 +1,288 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --deep-bg: #eaebf9 !important;           
+  --glass: #ffffff !important;             
+  --glass-border: #e2e8f0;                 
+  --electric-blue: #1d4ed8;                
+  --indigo-glow: #8b5cf6;                  
+  --text-main: #050a12;                    
+  --text-muted: #414e61;                   
+  --banner-grad: linear-gradient(90deg, #1d4ed8 0%, #a855f7 100%);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* 1. UPDATED WRAPPER: Forced to fill the laptop screen perfectly */
+.dashboard-wrapper {
+  background-color: var(--deep-bg);
+  height: 100vh; /* Changed from min-height to height to lock it to the screen */
+  width: 100vw;
+  display: flex;
+  color: var(--text-main);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  overflow: hidden; /* Prevents the whole page from scrolling */
+  position: relative;
+}
+
+/* Background Glows */
+.glow-circle {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  filter: blur(140px);
+  z-index: 0;
+  opacity: 0.05;
+}
+.top-right { top: -150px; right: -100px; background: var(--electric-blue); }
+.bottom-left { bottom: -150px; left: -100px; background: var(--indigo-glow); }
+
+/* 2. UPDATED SIDEBAR: This now fills 100% of the vertical space */
+.glass-sidebar {
+  width: 280px;
+  height: 100%; /* Force it to stretch to the bottom */
+  background: #ffffff; 
+  border-right: 1px solid var(--glass-border);
+  padding: 3rem 1.5rem;
+  z-index: 10;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo { font-size: 1.5rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 2rem; color: var(--text-main); }
+.logo span { color: rgb(72, 72, 196); }
+
+.nav-item {
+  padding: 12px 18px;
+  border-radius: 12px;
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: 0.3s;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.nav-item.active { 
+  background: #6366f1; 
+  color: #ffffff; 
+}
+
+/* 3. UPDATED MAIN VIEWPORT: Right side scrolls independently */
+.main-viewport {
+  flex: 1;
+  height: 100%;
+  padding: 60px 40px;
+  z-index: 5;
+  overflow-y: auto; /* Only this part scrolls if content is long */
+  display: flex;
+  justify-content: center;
+}
+
+.viewport-content-container {
+  width: 100%;
+  max-width: 1400px;
+  padding-bottom: 60px; /* Extra breathing room at the bottom */
+}
+
+
+
+/* Page Header Area */
+.page-header {
+  display: flex;
+  flex-direction: row; 
+  justify-content: space-between; 
+  align-items: center;
+  margin-bottom: 40px;
+  background: var(--banner-grad);
+  padding: 40px;
+  border-radius: 24px;
+  color: #ffffff !important;
+}
+
+.title-area h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -1px;
+  line-height: 1.2;
+}
+.title-area h1 span { color: #fcd34d; } 
+.title-area p { color: rgba(255,255,255,0.85); font-size: 1.1rem; margin-top: 10px; }
+
+.glowing-button {
+  background: #471765;
+  padding: 14px 28px;
+  border-radius: 12px;
+  color: #ffffff; /* Contrast fix */
+  text-decoration: none;
+  font-weight: 800;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+  display: inline-block;
+}
+
+.glowing-button:hover { 
+  transform: translateY(-3px); 
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15); 
+}
+
+/* Table Section */
+.glass-table-container {
+  background: #ffffff;
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+  width: 100%;
+}
+
+.custom-table { width: 100%; border-collapse: collapse; }
+
+.custom-table th { 
+  text-align: left;
+  padding:20px; 
+  color: var(--text-muted); 
+  font-size: 0.90rem; 
+  text-transform: uppercase; 
+  font-weight: 800; 
+  letter-spacing: 1px;
+  border-bottom: 4px solid var(--glass-border);
+  
+}
+
+.actions-flex { 
+  display: flex; 
+  gap: 12px; 
+  justify-content: flex-start ; 
+  align-items: center;
+}
+
+.custom-table td { padding: 25px 20px; border-bottom: 1px solid #f1f5f9; color: var(--text-main); }
+.bold-blue { color: var(--electric-blue); font-weight: 400; font-size: 0.90rem; }
+.pill { background: rgba(73, 74, 126, 0.1); color: rgba(0, 0, 0, 0.668); padding: 6px 14px; border-radius: 8px; font-size: 0.90rem; font-weight: 500; }
+
+.action-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.edit-pill { background: rgba(99, 102, 241, 0.1); color: #4f46e5; }
+.delete-pill { background: #fee2e2; color: #ef4444; }
+
+/* Stats Mini Cards */
+.stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-bottom: 40px; }
+.stat-mini-card { background: #ffffff; border: 1px solid var(--glass-border); padding: 30px; border-radius: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
+.stat-mini-card strong { display: block; font-size: 2.2rem; margin-top: 8px; color: var(--text-muted); }
+
+
+/* Modal overlay covers full screen */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4); /* softer dim background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Centered modal box with subtle solid look */
+.modal-box {
+  background: rgba(20, 20, 30, 0.95); /* subtle solid dark background */
+  border-radius: 1rem;
+  padding: 2rem;
+  width: 400px;
+  max-width: 90%;
+  text-align: center;
+  color: #f0f0f5;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 12px rgba(78, 195, 245, 0.2); /* subtle glow */
+  position: relative;
+  animation: popupFade 0.3s ease;
+}
+
+/* Popup fade-in animation */
+@keyframes popupFade {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* Modal heading */
+.modal-box h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #4ec3f5; /* electric blue accent */
+  text-shadow: 0 0 6px #4ec3f5;
+}
+
+/* Modal text */
+.modal-box p {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  color: #d0d0e0;
+}
+
+/* Buttons container */
+.modal-actions {
+  display: flex;
+  justify-content: space-around;
+  gap: 1rem;
+}
+
+/* Cancel button */
+.cancel-btn {
+  background: #2c2c3a; /* subtle solid color */
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+.cancel-btn:hover {
+  background: #3a3a4d;
+  transform: scale(1.05);
+}
+
+/* Confirm/Delete button */
+.confirm-btn {
+  background: #e63946;
+  color: #fff;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.75rem;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 0 12px #e63946, 0 0 20px #ff5e6e;
+  transition: all 0.2s ease;
+}
+.confirm-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #e63946, 0 0 30px #ff5e6e;
+}
+
+/* Optional close X button top-right */
+.modal-close {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.8rem;
+  font-size: 1.2rem;
+  color: #ccc;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.modal-close:hover {
+  color: #fff;
+  transform: scale(1.2);
+}
