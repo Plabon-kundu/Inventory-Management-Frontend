@@ -1,7 +1,7 @@
 import { useState } from "react";
 import MovementLogTable from "../components/MovementLogTable";
 import MovementFilter from "../components/MovementFilter";
-import "./MovementLogs.css";
+import "../styles/MovementLogs.css";
 
 const MovementLogs = () => {
   const [logs] = useState([

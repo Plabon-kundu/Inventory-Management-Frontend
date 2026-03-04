@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import "./WarehouseList.css";
+import { Link, useLocation } from "react-router-dom";
+import "../styles/WarehouseList.css";
 
 const WarehouseList = () => {
+  const location = useLocation();
+
   const [warehouses, setWarehouses] = useState([
     { id: 1, name: "Dhaka Warehouse", location: "Dhaka", description: "Main distribution center for the capital region." },
     { id: 2, name: "Chittagong Warehouse", location: "Chittagong", description: "Primary port-side facility for international shipping." },
@@ -22,9 +24,14 @@ const WarehouseList = () => {
       <aside className="glass-sidebar">
         <div className="logo">STOCK<span>FLOW</span></div>
         <nav>
-          <div className="nav-item active">Warehouses</div>
-          <div className="nav-item">Analytics</div>
-          <div className="nav-item">Inventory</div>
+         
+          
+          <Link
+            to="/movement-logs"
+            className={`nav-item ${location.pathname === "/movement-logs" ? "active" : ""}`}
+          >
+          Inventory-Movement
+          </Link>
         </nav>
       </aside>
 
@@ -36,7 +43,7 @@ const WarehouseList = () => {
               <h1>Warehouse <span>Hub</span></h1>
               <p>Monitoring {warehouses.length} active logistics nodes</p>
             </div>
-            {/* THIS IS YOUR NEW WAREHOUSE BUTTON */}
+            {/* New Warehouse Button */}
             <Link to="/warehouses/create" className="glowing-button">
               + New Warehouse
             </Link>
@@ -64,7 +71,6 @@ const WarehouseList = () => {
                   <th>Entity Name</th>
                   <th>Region</th>
                   <th>Description</th>
-                  {/* REMOVED INLINE STYLE SO CSS ALIGNMENT TAKES OVER */}
                   <th>Actions</th>
                 </tr>
               </thead>

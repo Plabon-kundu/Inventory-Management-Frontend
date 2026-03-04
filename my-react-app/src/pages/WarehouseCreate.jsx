@@ -1,6 +1,7 @@
+
 import { useNavigate } from "react-router-dom";
 import WarehouseForm from "../components/WarehouseForm";
-import "./WarehouseCreate.css";
+import "../styles/WarehouseCreate.css";
 
 const WarehouseCreate = () => {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ const WarehouseCreate = () => {
 
   return (
     <div className="create-page-wrapper">
-      {/* Immersive Background Glows */}
+     
       <div className="glow-circle top-right"></div>
       <div className="glow-circle bottom-left"></div>
 
