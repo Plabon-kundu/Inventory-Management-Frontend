@@ -1,9 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+/* ===== UPDATED GLOBAL VARIABLES (Purple Theme) ===== */
 :root {
-  --deep-bg: #11073b;
-  --glass: rgba(255, 255, 255, 0.03);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --electric-blue: #4ec3f5;
-  --indigo-glow: #e6e6f0;
+  --deep-bg: #eaebf9;           /* Light lavender base */
+  --glass: #ffffff;             /* Crisp white for panels */
+  --glass-border: #cbd5e1;      /* Visible border for definition */
+  --electric-blue: #1d4ed8;     /* Deep vivid blue */
+  --vivid-purple: #7c3aed;      /* Deep Royal Purple */
+  --indigo-glow: #8b5cf6;       /* Soft purple accent */
+  --text-main: #050a12;         /* High-contrast dark slate */
+  --text-muted: #5b4a92;        /* Muted Purple */
+  --accent-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
 }
 
 /* Fullscreen Page Wrapper */
@@ -16,11 +23,11 @@
   padding: 60px 40px;
   position: relative;
   overflow-x: hidden;
-  color: white;
+  color: var(--text-main); /* Dark text for light theme */
   font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
-/* Background Decor */
+/* Background Decor - Updated to Purple/Blue */
 .glow-circle {
   position: absolute;
   width: 800px;
@@ -28,15 +35,16 @@
   border-radius: 50%;
   filter: blur(160px);
   z-index: 0;
-  opacity: 0.15;
+  opacity: 0.12;
 }
 .top-right { top: -250px; right: -200px; background: var(--electric-blue); }
 .bottom-left { bottom: -250px; left: -200px; background: var(--indigo-glow); }
 
 .movement-content-container {
   width: 100%;
-  max-width: 1400px; /* Spacious width for Laptop */
+  max-width: 1400px;
   z-index: 10;
+  padding-bottom: 100px; /* Professional bottom space */
 }
 
 .movement-header {
@@ -49,27 +57,29 @@
   letter-spacing: -2px;
   margin: 0;
   line-height: 1.1;
+  color: #2d1b69; /* Deep Purple-Black */
 }
 
 .page-title span {
-  color: var(--electric-blue);
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .movement-header p {
-  color: #94a3b8;
+  color: var(--text-muted);
   font-size: 1.2rem;
   margin-top: 10px;
+  font-weight: 500;
 }
 
-/* Glass Panel */
+/* Glass Panel - Updated to White Card */
 .movement-glass-panel {
   background: var(--glass);
-  backdrop-filter: blur(40px);
-  -webkit-backdrop-filter: blur(40px);
   border: 1px solid var(--glass-border);
   border-radius: 40px;
   padding: 50px;
-  box-shadow: 0 50px 100px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 50px 100px -20px rgba(124, 58, 237, 0.15);
 }
 
 /* Filter Section */
@@ -81,24 +91,27 @@
 
 .filter-container select,
 .filter-container input {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
   padding: 15px 20px;
-  border-radius: 12px;
-  color: white;
+  border-radius: 14px;
+  color: var(--text-main);
   font-size: 1rem;
-  min-width: 200px;
+  min-width: 220px;
   transition: 0.3s;
+  font-family: inherit;
+  font-weight: 600;
 }
 
 .filter-container select:focus,
 .filter-container input:focus {
   outline: none;
-  border-color: var(--electric-blue);
-  box-shadow: 0 0 20px rgba(78, 195, 245, 0.2);
+  border-color: var(--vivid-purple);
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.1);
 }
 
-/* Table Alignment Fixes */
+/* Table Styling Refinements */
 .table-wrapper {
   margin-top: 20px;
   width: 100%;
@@ -106,103 +119,90 @@
 
 .movement-table {
   width: 100%;
-  border-collapse: collapse; /* Crucial for perfect header alignment */
+  border-collapse: collapse;
   text-align: left;
 }
 
 .movement-table th {
   padding: 20px;
-  color: var(--indigo-glow);
+  color: var(--vivid-purple);
   text-transform: uppercase;
   font-size: 0.8rem;
   font-weight: 800;
   letter-spacing: 2px;
-  border-bottom: 2px solid rgba(78, 195, 245, 0.3);
-  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 2px solid rgba(124, 58, 237, 0.1);
+  background: rgba(248, 250, 252, 0.5);
 }
 
 .movement-table td {
-  padding: 20px;
+  padding: 22px 20px;
   font-size: 1rem;
-  color: #e2e8f0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.movement-table tbody tr {
-  transition: 0.3s ease;
+  color: var(--text-main);
+  border-bottom: 1px solid #f1f5f9;
+  font-weight: 500;
 }
 
 .movement-table tbody tr:hover {
-  background: rgba(255, 255, 255, 0.04);
+  background: #f8fafc;
 }
 
 .movement-table tbody tr:hover td {
-  color: var(--electric-blue);
+  color: var(--vivid-purple);
 }
 
-/* Type Badges */
+/* Type Badges - Adjusted for Light Background visibility */
 .sale-badge {
-  background: rgba(239, 68, 68, 0.15);
-  color: #f87171;
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
   padding: 6px 14px;
-  border-radius: 50px;
+  border-radius: 10px;
   font-size: 0.75rem;
-  font-weight: 700;
-  border: 1px solid rgba(239, 68, 68, 0.2);
+  font-weight: 800;
+  border: 1px solid rgba(239, 68, 68, 0.1);
 }
 
 .purchase-badge {
-  background: rgba(34, 197, 94, 0.15);
-  color: #4ade80;
+  background: rgba(16, 185, 129, 0.1);
+  color: #059669;
   padding: 6px 14px;
-  border-radius: 50px;
+  border-radius: 10px;
   font-size: 0.75rem;
-  font-weight: 700;
-  border: 1px solid rgba(34, 197, 94, 0.2);
+  font-weight: 800;
+  border: 1px solid rgba(16, 185, 129, 0.1);
 }
 
 /* No Records */
 .no-records-glass {
   padding: 60px;
   text-align: center;
-  border: 1px dashed var(--glass-border);
+  border: 2px dashed #cbd5e1;
   border-radius: 20px;
-  color: var(--indigo-glow);
+  color: var(--text-muted);
+  font-weight: 600;
 }
 
-/* Scrollbar Styling for Laptop */
+/* Scrollbar Styling */
 .table-wrapper::-webkit-scrollbar {
   height: 8px;
 }
 .table-wrapper::-webkit-scrollbar-thumb {
-  background: var(--glass-border);
+  background: #cbd5e1;
   border-radius: 10px;
 }
-/* ===== Dropdown (Select) Fix ===== */
+
+/* Dropdown (Select) Styling Fix for Light Theme */
 .filter-container select {
   cursor: pointer;
-  appearance: none; /* Removes default browser arrow to style our own */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%237c3aed'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 15px center;
-  background-size: 15px;
-  padding-right: 40px !important;
+  background-size: 14px;
+  padding-right: 45px !important;
 }
 
-/* This targets the actual dropdown menu list */
 .filter-container select option {
-  background-color: #1b274a; /* A slightly lighter version of your deep-bg */
-  color: rgb(182, 202, 231);
-  padding: 10px;
-}
-
-/* Fix for Chrome/Safari/Edge to ensure the background stays dark */
-.filter-container select:focus {
-  background-color: rgba(255, 255, 255, 0.08);
-}
-
-/* Optional: Adding a hover state for the options if the browser supports it */
-.filter-container select option:hover {
-  background-color: var(--electric-blue);
-  color: #6f5bbb;
+  background-color: #ffffff;
+  color: var(--text-main);
+  padding: 12px;
 }
