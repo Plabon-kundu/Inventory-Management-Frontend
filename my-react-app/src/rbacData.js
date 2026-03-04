@@ -1,4 +1,7 @@
 // src/rbacData.js
+// Change applied:
+// - Removed "users" and "reports" from menuItems to hide those navbar buttons.
+// Everything else remains the same.
 
 export const MOCK_USERS = [
   { id: 1, username: "admin", password: "admin123", role: "admin", name: "John Admin" },
@@ -16,7 +19,8 @@ export const ROLE_PERMISSIONS = {
     canDeleteData: true,
     canEditSettings: true,
     canViewAuditLogs: true,
-    menuItems: ["dashboard", "users", "products", "purchases", "reports", "settings", "audit"],
+    // ✅ Users + Reports removed from navbar
+    menuItems: ["dashboard", "products", "purchases", "settings", "audit"],
   },
   manager: {
     canViewDashboard: true,
@@ -27,7 +31,8 @@ export const ROLE_PERMISSIONS = {
     canDeleteData: false,
     canEditSettings: false,
     canViewAuditLogs: false,
-    menuItems: ["dashboard", "products", "purchases", "reports"],
+    // ✅ Users + Reports removed from navbar
+    menuItems: ["dashboard", "products", "purchases"],
   },
   staff: {
     canViewDashboard: true,
@@ -38,6 +43,7 @@ export const ROLE_PERMISSIONS = {
     canDeleteData: false,
     canEditSettings: false,
     canViewAuditLogs: false,
+    // ✅ Users + Reports removed from navbar
     menuItems: ["dashboard", "purchases"],
   },
 };

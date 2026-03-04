@@ -1,7 +1,18 @@
 // src/pages/Dashboard.jsx
+// Changes applied (only these):
+// 1) Removed "Reports" and "Users" buttons from navbar
+// 2) "Products" is clickable, but Product Management page is removed (click keeps you on dashboard)
+// 3) "Warehouses" card is clickable and smoothly scrolls to a Warehouses section
+// 4) Added "AI Demand Forecasting" navbar button to open /ai-demand-forecasting
+// Everything else remains the same UI/logic.
+
 import React, { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MOCK_PRODUCTS, ROLE_PERMISSIONS } from "../rbacData";
+import PurchasesContent from "../components/purchases/PurchasesContent";
+
+const LS_PRODUCTS_KEY = "products";
+const LS_PURCHASES_KEY = "purchases";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -13,6 +24,18 @@ export default function Dashboard() {
 
   const [currentPage, setCurrentPage] = useState("dashboard");
 
+  // Products state (localStorage fallback)
+  const [products, setProducts] = useState(() => {
+    const raw = localStorage.getItem(LS_PRODUCTS_KEY);
+    return raw ? JSON.parse(raw) : MOCK_PRODUCTS;
+  });
+
+  // Purchases state (localStorage fallback)
+  const [purchases, setPurchases] = useState(() => {
+    const raw = localStorage.getItem(LS_PURCHASES_KEY);
+    return raw ? JSON.parse(raw) : [];
+  });
+
   if (!user) return null;
 
   const permissions = ROLE_PERMISSIONS[user.role];
@@ -22,93 +45,12 @@ export default function Dashboard() {
     navigate("/login");
   };
 
-  const Products = () => {
-    if (!permissions.canManageProducts) {
-      return (
-        <div className="permissions-card denied-card">
-          <h2 className="denied-title">⛔ Access Denied</h2>
-          <p>You don't have permission to manage products.</p>
-          <p className="small">Required role: Admin or Manager</p>
-        </div>
-      );
+  // Smooth scroll to Warehouses section inside Dashboard
+  const scrollToWarehouses = () => {
+    const el = document.getElementById("warehouses-section");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
     }
-
-    return (
-      <div>
-        <h2 className="section-title">📦 Product Management</h2>
-        <div className="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Product Name</th>
-                <th>Stock</th>
-                <th>Price</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {MOCK_PRODUCTS.map((p) => (
-                <tr key={p.id}>
-                  <td>{p.id}</td>
-                  <td>{p.name}</td>
-                  <td>{p.stock}</td>
-                  <td>${p.price}</td>
-                  <td>
-                    <button className="action-btn btn-view">View</button>
-                    <button className="action-btn btn-edit">Edit</button>
-                    {user.role === "admin" ? (
-                      <button className="action-btn btn-delete">Delete</button>
-                    ) : null}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    );
-  };
-
-  const Purchases = () => {
-    return (
-      <div>
-        <h2 className="section-title">🛒 Purchase Management</h2>
-        <div className="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>Purchase ID</th>
-                <th>Date</th>
-                <th>Product</th>
-                <th>Quantity</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>#1001</td>
-                <td>2024-01-20</td>
-                <td>Laptop</td>
-                <td>5</td>
-                <td>
-                  <span className="ok">Completed</span>
-                </td>
-              </tr>
-              <tr>
-                <td>#1002</td>
-                <td>2024-01-19</td>
-                <td>Mouse</td>
-                <td>20</td>
-                <td>
-                  <span className="ok">Completed</span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    );
   };
 
   const DashboardHome = () => {
@@ -157,22 +99,64 @@ export default function Dashboard() {
           <div className="dashboard-card">
             <div className="card-icon">📦</div>
             <div className="card-title">Total Products</div>
-            <div className="card-value">156</div>
+            <div className="card-value">{products.length}</div>
             <div className="card-desc">Across all warehouses</div>
           </div>
 
-          <div className="dashboard-card">
+          {/* Warehouses card is clickable */}
+          <div className="dashboard-card" style={{ cursor: "pointer" }} onClick={scrollToWarehouses} role="button">
             <div className="card-icon">🏭</div>
             <div className="card-title">Warehouses</div>
             <div className="card-value">3</div>
-            <div className="card-desc">Active locations</div>
+            <div className="card-desc">Active locations (Click)</div>
           </div>
 
           <div className="dashboard-card">
             <div className="card-icon">📊</div>
-            <div className="card-title">Monthly Purchases</div>
-            <div className="card-value">$45.2K</div>
-            <div className="card-desc">+15% from last month</div>
+            <div className="card-title">Total Purchases</div>
+            <div className="card-value">{purchases.length}</div>
+            <div className="card-desc">Saved in local storage</div>
+          </div>
+        </div>
+
+        {/* Scroll target section for Warehouses */}
+        <div className="permissions-card" id="warehouses-section">
+          <h2>🏭 Warehouses</h2>
+          <p>Warehouse section is clickable from the dashboard card.</p>
+
+          <div className="table-container mt-15">
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Warehouse Name</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Main Warehouse</td>
+                  <td>
+                    <span className="ok">Active</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>North Warehouse</td>
+                  <td>
+                    <span className="ok">Active</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>South Warehouse</td>
+                  <td>
+                    <span className="ok">Active</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
 
@@ -264,8 +248,37 @@ export default function Dashboard() {
   };
 
   const renderPage = () => {
-    if (currentPage === "products") return <Products />;
-    if (currentPage === "purchases") return <Purchases />;
+    // Product Management page removed:
+    // If currentPage becomes "products", show DashboardHome instead.
+    if (currentPage === "products") return <DashboardHome />;
+
+    if (currentPage === "purchases") {
+      if (!permissions.canManagePurchases) {
+        return (
+          <div className="permissions-card denied-card">
+            <h2 className="denied-title">⛔ Access Denied</h2>
+            <p>You don't have permission to manage purchases.</p>
+          </div>
+        );
+      }
+
+      return (
+        <PurchasesContent
+          user={user}
+          products={products}
+          purchases={purchases}
+          onProductsChange={(nextProducts) => {
+            setProducts(nextProducts);
+            localStorage.setItem(LS_PRODUCTS_KEY, JSON.stringify(nextProducts));
+          }}
+          onPurchasesChange={(nextPurchases) => {
+            setPurchases(nextPurchases);
+            localStorage.setItem(LS_PURCHASES_KEY, JSON.stringify(nextPurchases));
+          }}
+        />
+      );
+    }
+
     return <DashboardHome />;
   };
 
@@ -288,10 +301,14 @@ export default function Dashboard() {
                 </span>
               ) : null}
 
+              {/* Products remains clickable but does not open Product Management page */}
               {permissions.menuItems.includes("products") ? (
                 <span
-                  className={`nav-link ${currentPage === "products" ? "active" : ""}`}
-                  onClick={() => setCurrentPage("products")}
+                  className="nav-link"
+                  onClick={() => {
+                    // Keep it clickable but show dashboard (product page removed)
+                    setCurrentPage("dashboard");
+                  }}
                 >
                   Products
                 </span>
@@ -306,8 +323,15 @@ export default function Dashboard() {
                 </span>
               ) : null}
 
-              {permissions.menuItems.includes("reports") ? <span className="nav-link">Reports</span> : null}
-              {permissions.menuItems.includes("users") ? <span className="nav-link">Users</span> : null}
+              {/* New navbar button for AI Demand Forecasting */}
+              <span className="nav-link" onClick={() => navigate("/ai-demand-forecasting")}>
+                AI Demand Forecasting
+              </span>
+
+              {/* Reports and Users removed completely */}
+              {/* {permissions.menuItems.includes("reports") ? <span className="nav-link">Reports</span> : null} */}
+              {/* {permissions.menuItems.includes("users") ? <span className="nav-link">Users</span> : null} */}
+
               {permissions.menuItems.includes("settings") ? <span className="nav-link">Settings</span> : null}
             </div>
 
