@@ -1,15 +1,20 @@
-import "../pages/SmartReorder.css";
+import "../styles/SmartReorder.css";
 
-const ReorderAlertBanner = ({ alertMessage }) => {
-  // Logic to separate the number for highlighting
-  const count = alertMessage.match(/\d+/); // Finds the number in the string
-  const text = alertMessage.replace(/\d+/, ""); // Gets the rest of the text
+const ReorderAlertBanner = ({ products }) => {
+  const reorderCount = products.filter(
+    (p) => p.reorder_recommended
+  ).length;
+
+  if (reorderCount === 0) return null;
 
   return (
     <div className="reorder-alert-banner">
       <div className="alert-dot"></div>
       <div className="alert-message">
-        <span>{count}</span>{text}
+        <span>{reorderCount}</span>
+        {reorderCount === 1
+          ? " Product Requires Reordering"
+          : " Products Require Reordering"}
       </div>
     </div>
   );

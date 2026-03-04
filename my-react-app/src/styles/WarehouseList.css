@@ -61,7 +61,7 @@
   color: var(--text-muted);
   transition: 0.3s;
   margin-bottom: 10px;
-  font-weight: 600;
+  font-weight: 900;
 }
 .nav-item.active { 
   background: #6366f1; 

@@ -1,7 +1,8 @@
+
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import WarehouseForm from "../components/WarehouseForm";
-import "./WarehouseEdit.css";
+import "../styles/WarehouseEdit.css";
 
 const dummyWarehouses = [
   { id: 1, name: "Dhaka Warehouse", location: "Dhaka", description: "Main warehouse" },
@@ -28,12 +29,12 @@ const WarehouseEdit = () => {
 
   return (
     <div className="edit-fullscreen-wrapper">
-      {/* Background Decor */}
+      
       <div className="glow-blur-1"></div>
       <div className="glow-blur-2"></div>
 
       <div className="split-container">
-        {/* LEFT SIDE: Visual Content to fill laptop screen */}
+      
         <div className="info-panel">
           <div className="back-nav" onClick={() => navigate("/warehouses")}>
             ← Back to Hub
@@ -50,7 +51,7 @@ const WarehouseEdit = () => {
           </div>
         </div>
 
-        {/* RIGHT SIDE: The Form */}
+      
         <div className="form-panel">
           <div className="glass-form-card">
             <div className="mobile-only-header">

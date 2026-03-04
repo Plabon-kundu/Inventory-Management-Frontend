@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./WarehouseForm.css";
+import "../styles/WarehouseForm.css";
 
 const WarehouseForm = ({ onSubmit, initialData = {} }) => {
   const [name, setName] = useState(initialData.name || "");
