@@ -1,51 +1,44 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+// src/App.jsx
+// Dark mode removed completely (no toggle, no body class changes).
 
-// Old Pages
+import React, { useMemo } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
+import AIDemandForecasting from "./pages/AIDemandForecasting";
 
-// New Feature Pages
-import WarehouseList from "./pages/WarehouseList";
-import WarehouseCreate from "./pages/WarehouseCreate";
-import WarehouseEdit from "./pages/WarehouseEdit";
-import MovementLogs from "./pages/MovementLogs";
-import SmartReorderPage from "./pages/SmartReorderPage";
+export default function App() {
+  const user = useMemo(() => {
+    const raw = localStorage.getItem("user");
+    return raw ? JSON.parse(raw) : null;
+  }, []);
 
-function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        {/* Old Login/Dashboard Routes */}
-        <Route path="/login" element={<Login />} />
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          }
-        />
+    <Routes>
+      <Route path="/" element={<Navigate to={user ? "/dashboard" : "/login"} replace />} />
 
-        {/* Redirect root to warehouse list */}
-        <Route path="/" element={<Navigate to="/warehouses" replace />} />
+      <Route path="/login" element={<Login />} />
 
-        {/* Warehouse Routes */}
-        <Route path="/warehouses" element={<WarehouseList />} />
-        <Route path="/warehouses/create" element={<WarehouseCreate />} />
-        <Route path="/warehouses/edit/:id" element={<WarehouseEdit />} />
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        }
+      />
 
-        {/* Movement Logs Route */}
-        <Route path="/movement-logs" element={<MovementLogs />} />
+      <Route
+        path="/ai-demand-forecasting"
+        element={
+          <ProtectedRoute>
+            <AIDemandForecasting />
+          </ProtectedRoute>
+        }
+      />
 
-        {/* Smart Reordering Module Route */}
-        <Route path="/smart-reorder" element={<SmartReorderPage />} />
-
-        {/* Fallback */}
-        <Route path="*" element={<div>Page Not Found</div>} />
-      </Routes>
-    </BrowserRouter>
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
   );
 }
-
-export default App;
