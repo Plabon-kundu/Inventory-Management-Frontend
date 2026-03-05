@@ -1,0 +1,131 @@
+:root {
+  /* High-Definition Purple Palette */
+  --deep-bg: #eaebf9;           
+  --glass: #ffffff;             
+  --glass-border: #cbd5e1;      
+  --electric-blue: #1d4ed8;     
+  --indigo-glow: #8b5cf6;       /* Vivid Purple */
+  --text-main: #050a12;         
+  --text-muted: #475569;        
+  /* Adding a specific vibrant purple for navigation */
+  --vivid-purple: #7c3aed;      
+  --accent-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+}
+
+/* Page Wrapper */
+.create-page-wrapper {
+  background-color: var(--deep-bg);
+  min-height: 100vh;
+  width: 100vw; 
+  display: flex;
+  justify-content: center; 
+  align-items: center;     
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  position: relative;
+  overflow-x: hidden;
+  color: var(--text-main);
+  padding: 40px;
+  margin: 0; 
+}
+
+/* Immersive Decorative Blobs */
+.glow-circle {
+  position: absolute;
+  width: 900px;
+  height: 900px;
+  border-radius: 50%;
+  filter: blur(140px);
+  z-index: 0;
+  opacity: 0.15;
+}
+.top-right { top: -300px; right: -250px; background: var(--electric-blue); }
+.bottom-left { bottom: -300px; left: -250px; background: var(--indigo-glow); }
+
+/* Main Container */
+.create-content-container {
+  width: 100%;
+  max-width: 1200px; 
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* UPDATED BACK LINK: Now matching the Purple Vibe */
+.back-link {
+  color: var(--vivid-purple); /* Changed from blue to vivid purple */
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 800;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  width: fit-content;
+}
+
+/* Adding a custom arrow effect using CSS */
+.back-link::before {
+  
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.back-link:hover { 
+  color: #a855f7; /* Lightens to a bright purple on hover */
+  transform: translateX(-5px);
+  filter: drop-shadow(0 0 8px rgba(124, 58, 237, 0.3));
+}
+
+.back-link:hover::before {
+  transform: translateX(-3px);
+}
+
+.create-header-section {
+  margin-bottom: 35px;
+  text-align: left;
+}
+
+.create-header-section h1 {
+  font-size: 4.5rem;
+  font-weight: 800;
+  letter-spacing: -3px;
+  line-height: 1;
+  margin: 0;
+  color: var(--text-main);
+}
+
+.create-header-section h1 span {
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.create-header-section p {
+  color: var(--text-muted);
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin-top: 12px;
+  opacity: 0.8;
+}
+
+/* Perfected Glass Panel */
+.create-glass-panel {
+  background: var(--glass);
+  border: 2px solid var(--glass-border); 
+  border-radius: 48px;
+  padding: 80px; 
+  box-shadow: 
+    0 40px 80px -15px rgba(99, 102, 241, 0.15),
+    0 20px 40px -20px rgba(0, 0, 0, 0.05); 
+  width: 100%;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(60px); }
+  to { opacity: 1; transform: translateY(0); }
+}

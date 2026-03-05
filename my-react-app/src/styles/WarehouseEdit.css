@@ -1,0 +1,225 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+  /* High-Definition Purple Palette */
+  --deep-bg: #eaebf9;           /* Light lavender base */
+  --glass: #ffffff;             /* Crisp white for the form */
+  --glass-border: #cbd5e1;      /* Visible border for definition */
+  --electric-blue: #1d4ed8;     /* Deep vivid blue */
+  --vivid-purple: #7c3aed;      /* Deep Royal Purple for nav & buttons */
+  --indigo-glow: #8b5cf6;       /* Soft purple accent */
+  --text-main: #050a12;         /* High-contrast dark slate */
+  --text-muted: #5b4a92;        /* Muted Purple for regional text */
+  --accent-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+}
+
+/* 1. RESET BROWSER DEFAULTS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 2. FORCE FULL SCREEN */
+.edit-fullscreen-wrapper {
+  height: 100vh;
+  width: 100vw; 
+  background: var(--deep-bg);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: var(--text-main);
+  position: relative;
+  overflow: hidden; 
+  display: flex;
+}
+
+.split-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+}
+
+/* 3. LEFT SIDE: PURPLE INFO PANEL */
+.info-panel {
+  flex: 1.2; 
+  height: 100%;
+  padding: 5% 8%; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* Extra Design: Stronger Purple Gradient Background */
+  background: linear-gradient(160deg, rgba(243, 240, 255, 0.95) 0%, rgba(234, 235, 249, 0.8) 100%);
+  border-right: 2px solid rgba(124, 58, 237, 0.1);
+  position: relative;
+}
+
+.back-nav {
+  position: absolute;
+  top: 5%;
+  left: 8%;
+  cursor: pointer;
+  color: var(--vivid-purple);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: clamp(0.7rem, 1vw, 0.9rem);
+  transition: 0.3s all ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.back-nav:hover {
+  transform: translateX(-10px);
+  color: #a855f7;
+  text-shadow: 0 0 15px rgba(124, 58, 237, 0.4);
+}
+
+.node-id { 
+  color: var(--vivid-purple);
+  font-weight: 800; 
+  font-size: clamp(0.8rem, 1vw, 1rem); 
+  text-transform: uppercase; 
+  letter-spacing: 4px; 
+  position: relative;
+  display: inline-block;
+}
+
+/* EXTRA DESIGN: Animated Underline under ID */
+.node-id::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: var(--accent-gradient);
+  border-radius: 10px;
+}
+
+.info-content h1 { 
+  font-size: clamp(3rem, 6vw, 5rem); 
+  font-weight: 800; 
+  margin: 30px 0 20px; 
+  line-height: 1; 
+  letter-spacing: -3px;
+  color: #2d1b69; /* Deep Purple-Black */
+}
+
+.info-content h1 span { 
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.info-content p { 
+  font-size: clamp(1rem, 1.5vw, 1.3rem); 
+  color: var(--text-muted); 
+  max-width: 90%; 
+  line-height: 1.6; 
+  font-weight: 500;
+  /* One line gap distance */
+  margin-bottom: 24px; 
+}
+
+/* 4. RIGHT SIDE: FORM PANEL */
+.form-panel {
+  flex: 1; 
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5%;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.glass-form-card {
+  width: 100%;
+  max-width: 650px; 
+  background: var(--glass);
+  padding: 60px;
+  border-radius: 40px;
+  border: 2px solid var(--glass-border);
+  box-shadow: 0 40px 100px -20px rgba(124, 58, 237, 0.15);
+  animation: slideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
+
+/* Add space between title and first input */
+.glass-form-card form {
+  margin-top: 30px;
+}
+.glass-form-card h2 {
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 190px; /* increased space */
+}
+/* Form Styling Refinements */
+.form-group label {
+  color: var(--vivid-purple);
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  margin-bottom: px;
+  display: block;
+}
+
+.form-group input, .form-group textarea {
+  border: 2px solid #cbd5e1;
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 15px;
+  width: 100%;
+  transition: 0.3s;
+}
+
+.form-group input:focus {
+  border-color: var(--vivid-purple);
+  background: #ffffff;
+  outline: none;
+}
+
+.confirm-btn {
+  background: var(--accent-gradient);
+  color: white;
+  border: none;
+  padding: 18px 40px;
+  border-radius: 15px;
+  font-weight: 800;
+  width: 100%;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 10px 20px rgba(124, 58, 237, 0.3);
+}
+
+.confirm-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(124, 58, 237, 0.4);
+}
+
+/* 5. VIVID DECORATION */
+.glow-blur-1 { 
+  position: absolute; width: 60vw; height: 60vw; 
+  background: var(--electric-blue); filter: blur(150px); 
+  opacity: 0.12; top: -10vw; right: -10vw; z-index: 1;
+}
+.glow-blur-2 { 
+  position: absolute; width: 60vw; height: 60vw; 
+  background: var(--indigo-glow); filter: blur(150px); 
+  opacity: 0.15; bottom: -10vw; left: -10vw; z-index: 1;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 1024px) {
+  .split-container { flex-direction: column; }
+  .edit-fullscreen-wrapper { overflow-y: auto; height: auto; }
+  .info-panel { height: auto; padding: 100px 40px 40px; border-right: none; border-bottom: 2px solid var(--glass-border); }
+  .form-panel { height: auto; padding: 40px 20px; }
+}
