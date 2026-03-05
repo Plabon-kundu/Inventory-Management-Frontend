@@ -2,15 +2,24 @@
 import { useNavigate } from "react-router-dom";
 import WarehouseForm from "../components/WarehouseForm";
 import "../styles/WarehouseCreate.css";
+import { createWarehouse } from "../services/warehouseService";
+
 
 const WarehouseCreate = () => {
   const navigate = useNavigate();
 
-  const handleCreate = (data) => {
-    console.log("Warehouse created:", data);
+ const handleCreate = async (data) => {
+  try {
+    await createWarehouse(data);
+
     alert(`Warehouse "${data.name}" created successfully!`);
-    navigate("/warehouses"); 
-  };
+
+    navigate("/warehouses");
+  } catch (error) {
+    console.error(error);
+    alert("Failed to create warehouse");
+  }
+};
 
   return (
     <div className="create-page-wrapper">
