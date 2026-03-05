@@ -20,7 +20,7 @@ const request = async (url, options = {}) => {
 // Task 54: Backend will reject if stock goes negative
 // Task 57: Frontend validates positive quantity before sending
 export const createStockOut = (payload) =>
-  request("/stock-out", {
+  request("/api/stock-out", {
     method: "POST",
     body: JSON.stringify(payload),
     // payload shape: { product_id, warehouse_id, quantity, reason }
